@@ -1,10 +1,13 @@
 package com.ua.blackjack.model;
 
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "games")
+@Component
 public class Game implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
