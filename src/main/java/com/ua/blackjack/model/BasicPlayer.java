@@ -2,19 +2,23 @@ package com.ua.blackjack.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
-@MappedSuperclass
-public class BasicPlayer implements Serializable{
+@Entity
+@Table(name = "users")
+public class BasicPlayer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToMany(mappedBy = "player", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    private List<Card> cards;
+    @OneToMany(mappedBy = "player", cascade = CascadeType.PERSIST)
+    private Set<Card> cards;
 
-    @OneToMany(mappedBy = "player", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    private List<Game> games;
+    @OneToMany(mappedBy = "player", cascade = CascadeType.PERSIST)
+    private Set<Game> games;
+
+    private String role;
+    private String name;
 
     public BasicPlayer() {
     }
@@ -27,19 +31,35 @@ public class BasicPlayer implements Serializable{
         this.id = id;
     }
 
-    public List<Card> getCards() {
+    public Set<Card> getCards() {
         return cards;
     }
 
-    public void setCards(List<Card> cards) {
+    public void setCards(Set<Card> cards) {
         this.cards = cards;
     }
 
-    public List<Game> getGames() {
+    public Set<Game> getGames() {
         return games;
     }
 
-    public void setGames(List<Game> games) {
+    public void setGames(Set<Game> games) {
         this.games = games;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

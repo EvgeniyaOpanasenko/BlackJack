@@ -1,11 +1,6 @@
 package com.ua.blackjack.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
-/*@Entity
-@Table(name = "dealers")*/
-public class Dealer extends BasicPlayer{
+public class Dealer extends BasicPlayer {
     private Deck deck;
 
     public Dealer() {

@@ -19,8 +19,7 @@ public class Card implements Serializable{
     @JoinColumn(name = "player_id", referencedColumnName = "id")
     private BasicPlayer player;
 
-    @OneToMany
-    private Game game;
+    private Game gameId;
 
     public Card() {
     }
@@ -47,14 +46,6 @@ public class Card implements Serializable{
 
     public void setValue(CardRang value) {
         this.value = value;
-    }
-
-    public Game getGame() {
-        return game;
-    }
-
-    public void setGame(Game game) {
-        this.game = game;
     }
 
     public BasicPlayer getPlayer() {

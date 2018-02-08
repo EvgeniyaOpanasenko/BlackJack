@@ -6,6 +6,7 @@ import java.util.Queue;
 
 import static java.util.Objects.nonNull;
 
+
 public class Deck {
     private Queue<Card> cards;
 

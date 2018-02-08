@@ -12,13 +12,13 @@ public class Game implements Serializable{
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "player_id", referencedColumnName = "id")
-    private Player player;
+    private BasicPlayer player;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "dealer_id", referencedColumnName = "id")
-    private Dealer dealer;
+    private BasicPlayer dealer;
 
-    private Deck deck;
+    //private Deck deck;
 
     private GameStatus gameStatus;
 
@@ -33,29 +33,26 @@ public class Game implements Serializable{
         this.id = id;
     }
 
-    public Player getPlayer() {
+    public BasicPlayer getPlayer() {
         return player;
     }
 
-    public void setPlayer(Player player) {
+    public void setPlayer(BasicPlayer player) {
         this.player = player;
     }
 
-    public Dealer getDealer() {
+    public BasicPlayer getDealer() {
         return dealer;
+    }
+
+    public void setDealer(BasicPlayer dealer) {
+        this.dealer = dealer;
     }
 
     public void setDealer(Dealer dealer) {
         this.dealer = dealer;
     }
 
-    public Deck getDeck() {
-        return deck;
-    }
-
-    public void setDeck(Deck deck) {
-        this.deck = deck;
-    }
 
     public GameStatus getGameStatus() {
         return gameStatus;
