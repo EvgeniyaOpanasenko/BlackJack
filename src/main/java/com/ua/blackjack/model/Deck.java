@@ -1,12 +1,14 @@
 package com.ua.blackjack.model;
 
+import org.springframework.stereotype.Component;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
 import static java.util.Objects.nonNull;
 
-
+@Component
 public class Deck {
     private Queue<Card> cards;
 
@@ -14,7 +16,7 @@ public class Deck {
         this.cards = new LinkedList<>();
     }
 
-    Card deal() {
+    public Card deal() {
         Card next = poll();
         if (nonNull(next)) {
             return next;

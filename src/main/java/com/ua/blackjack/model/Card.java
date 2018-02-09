@@ -1,8 +1,11 @@
 package com.ua.blackjack.model;
 
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
+@Component
 @Entity
 @Table(name = "cards")
 public class Card implements Serializable{
@@ -13,7 +16,7 @@ public class Card implements Serializable{
     private CardSuit suit;
     //TODO find the way for better value Int enum storing
     @Enumerated(EnumType.ORDINAL)
-    private CardRang value;
+    private CardRank value;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "player_id", referencedColumnName = "id")
@@ -22,6 +25,11 @@ public class Card implements Serializable{
     private Game gameId;
 
     public Card() {
+    }
+
+    public Card(CardSuit suit, CardRank value) {
+        this.suit = suit;
+        this.value = value;
     }
 
     public Long getId() {
@@ -40,11 +48,11 @@ public class Card implements Serializable{
         this.suit = suit;
     }
 
-    public CardRang getValue() {
+    public CardRank getValue() {
         return value;
     }
 
-    public void setValue(CardRang value) {
+    public void setValue(CardRank value) {
         this.value = value;
     }
 
