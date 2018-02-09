@@ -13,7 +13,8 @@ public class Deck {
     private Queue<Card> cards;
 
     public Deck(List<Card> cards) {
-        this.cards = new LinkedList<>();
+
+        this.cards = new LinkedList<>(cards);
     }
 
     public Card deal() {

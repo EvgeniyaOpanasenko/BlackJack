@@ -30,7 +30,7 @@ public class GameServiceImpl implements GameService {
     @Autowired
     private Deck deck;
 
-    //TOD remove Player from game
+    //TODO remove Player from game
     private List<Card> player;
     private List<Card> dealer;
 
