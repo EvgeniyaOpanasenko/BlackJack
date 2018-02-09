@@ -55,10 +55,10 @@ angular.module('crudApp').factory('GameService',
             function createGame(game) {
                 console.log('Creating Game');
                 var deferred = $q.defer();
-                $http.post(urls.GAME_SERVICE_API, game)
+                $http.post(urls.GAME_SERVICE_API)
                     .then(
                         function (response) {
-                            loadGame();
+                            loadTable();
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
@@ -67,6 +67,10 @@ angular.module('crudApp').factory('GameService',
                         }
                     );
                 return deferred.promise;
+            }
+
+            function loadTable(){
+
             }
 
             function updateGame(game, id) {

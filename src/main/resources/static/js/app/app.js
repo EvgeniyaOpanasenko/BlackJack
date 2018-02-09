@@ -2,7 +2,7 @@ var app = angular.module('crudApp',['ui.router','ngStorage']);
 
 app.constant('urls', {
     BASE: 'http://localhost:8080/blackjack',
-    GAME_SERVICE_API : 'http://localhost:8080/blackjack/game/'
+    GAME_SERVICE_API : 'http://localhost:8080/blackjack/game'
 });
 
 app.config(['$stateProvider', '$urlRouterProvider',
@@ -11,7 +11,7 @@ app.config(['$stateProvider', '$urlRouterProvider',
         $stateProvider
             .state('home', {
                 url: '/',
-                templateUrl: 'partials/list',
+                templateUrl: 'partials/game',
                 controller:'GameController',
                 controllerAs:'ctrl'
             });
