@@ -11,16 +11,13 @@ angular.module('crudApp').controller('GameController',
         self.getAllGames = getAllGames;
         self.createGame = createGame;
         self.updateGame = updateGame;
-        self.removeGame = removeGame;
         self.editGame = editGame;
         self.reset = reset;
 
         self.successMessage = '';
         self.errorMessage = '';
+        self.infoMessage = ''; // when game is over. To show the score
         self.done = false;
-
-        self.onlyIntegers = /^\d+$/;
-        self.onlyNumbers = /^\d+([,.]\d+)?$/;
 
         function submit() {
             console.log('Submitting');
@@ -53,7 +50,6 @@ angular.module('crudApp').controller('GameController',
                 );
         }
 
-
         function updateGame(game, id){
             console.log('About to update game');
             GameService.updateGame(game, id)
@@ -72,21 +68,6 @@ angular.module('crudApp').controller('GameController',
                     }
                 );
         }
-
-
-        function removeGame(id){
-            console.log('About to remove Game with id '+id);
-            GameService.removeGame(id)
-                .then(
-                    function(){
-                        console.log('Game '+id + ' removed successfully');
-                    },
-                    function(errResponse){
-                        console.error('Error while removing game '+id +', Error :'+errResponse.data);
-                    }
-                );
-        }
-
 
         function getAllGames(){
             return GameService.getAllGames();
@@ -108,7 +89,7 @@ angular.module('crudApp').controller('GameController',
             self.successMessage='';
             self.errorMessage='';
             self.game={};
-            $scope.myForm.$setPristine(); //reset Form
+           // $scope.myForm.$setPristine(); //reset Form is it better to use form?
         }
     }
 

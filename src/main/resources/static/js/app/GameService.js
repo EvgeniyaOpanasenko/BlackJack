@@ -5,20 +5,18 @@ angular.module('crudApp').factory('GameService',
         function ($localStorage, $http, $q, urls) {
 
             var factory = {
-                loadAllGames: loadAllGames,
                 getAllGames: getAllGames,
-                getGame: getGame,
+                getGame: getGame, // when hit or bust or stand need to get game and update it
                 createGame: createGame,
-                updateGame: updateGame,
-                removeGame: removeGame
+                updateGame: updateGame
             };
 
             return factory;
 
-            function loadAllGames() {
+            function loadGame() {
                 console.log('Fetching all games');
                 var deferred = $q.defer();
-                $http.get(urls.USER_SERVICE_API)
+                $http.get(urls.GAME_SERVICE_API)
                     .then(
                         function (response) {
                             console.log('Fetched successfully all games');
@@ -40,7 +38,7 @@ angular.module('crudApp').factory('GameService',
             function getGame(id) {
                 console.log('Fetching Game with id :'+id);
                 var deferred = $q.defer();
-                $http.get(urls.USER_SERVICE_API + id)
+                $http.get(urls.GAME_SERVICE_API + id)
                     .then(
                         function (response) {
                             console.log('Fetched successfully Game with id :'+id);
@@ -57,10 +55,10 @@ angular.module('crudApp').factory('GameService',
             function createGame(game) {
                 console.log('Creating Game');
                 var deferred = $q.defer();
-                $http.post(urls.USER_SERVICE_API, game)
+                $http.post(urls.GAME_SERVICE_API, game)
                     .then(
                         function (response) {
-                            loadAllGames();
+                            loadGame();
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
@@ -74,10 +72,10 @@ angular.module('crudApp').factory('GameService',
             function updateGame(game, id) {
                 console.log('Updating Game with id '+id);
                 var deferred = $q.defer();
-                $http.put(urls.USER_SERVICE_API + id, game)
+                $http.put(urls.GAME_SERVICE_API + id, game)
                     .then(
                         function (response) {
-                            loadAllGames();
+                            loadGame();
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
@@ -87,23 +85,5 @@ angular.module('crudApp').factory('GameService',
                     );
                 return deferred.promise;
             }
-
-            function removeGame(id) {
-                console.log('Removing Game with id '+id);
-                var deferred = $q.defer();
-                $http.delete(urls.USER_SERVICE_API + id)
-                    .then(
-                        function (response) {
-                            loadAllGames();
-                            deferred.resolve(response.data);
-                        },
-                        function (errResponse) {
-                            console.error('Error while removing Game with id :'+id);
-                            deferred.reject(errResponse);
-                        }
-                    );
-                return deferred.promise;
-            }
-
         }
     ]);
