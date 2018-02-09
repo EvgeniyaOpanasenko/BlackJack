@@ -21,7 +21,7 @@ public class GameController {
     @Autowired
     private GameService gameService;
 
-    @PostMapping
+    @PostMapping(value = "/game")
     public ResponseEntity<Void> newGame(UriComponentsBuilder ucBuilder) {
         Game newGame = new Game();
         gameService.createGame(newGame);

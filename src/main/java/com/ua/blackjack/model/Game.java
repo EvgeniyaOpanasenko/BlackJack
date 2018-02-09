@@ -26,6 +26,7 @@ public class Game implements Serializable{
     private GameStatus gameStatus;
 
     public Game() {
+        setGameStatus(GameStatus.NEW_GAME);
     }
 
     public Long getId() {

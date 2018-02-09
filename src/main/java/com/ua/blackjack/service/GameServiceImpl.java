@@ -35,7 +35,8 @@ public class GameServiceImpl implements GameService {
     private List<Card> dealer;
 
     //TODO add exception
-    public void initGame() {
+    public void initGame(Game newGame) {
+        gameRepository.save(newGame);
         deal(player);
         deal(player);
         countResult();
@@ -84,7 +85,6 @@ public class GameServiceImpl implements GameService {
         return game.getGameStatus() == GameStatus.DEALER_TURN || HandScore.isTarget(player);
     }
 
-
     private void deal(List<Card> hand) {
         Card next = requireNonNull(deck.deal());
         //game.getDealer().getCards().add(next);
@@ -92,13 +92,9 @@ public class GameServiceImpl implements GameService {
         hand.add(next);
     }
 
-    public void countScore() {
-
-    }
-
     @Override
-    public Game createGame(Game newGame) {
-        initGame();
-        return gameRepository.save(newGame);
+    public void createGame(Game newGame) {
+         initGame(newGame);
+        //return gameRepository.save(newGame);
     }
 }
