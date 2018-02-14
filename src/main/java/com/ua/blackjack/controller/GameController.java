@@ -14,20 +14,20 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
-@RequestMapping("/blackjack")
+@RequestMapping("/game")
 public class GameController {
     private static final Logger LOG = LoggerFactory.getLogger(GameController.class);
 
     @Autowired
     private GameService gameService;
 
-    @PostMapping(value = "/game")
+    @PostMapping(value = "/create/")
     public ResponseEntity<Void> newGame(UriComponentsBuilder ucBuilder) {
         Game newGame = new Game();
         gameService.createGame(newGame);
         LOG.info(" new game created: " + newGame.getId());
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/blackjack/game/{id}").buildAndExpand(newGame.getId()).toUri());
+        headers.setLocation(ucBuilder.path("/game/game/{id}").buildAndExpand(newGame.getId()).toUri());
         return new ResponseEntity<Void>(headers, HttpStatus.OK);
     }
 

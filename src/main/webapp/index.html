@@ -1,18 +1,93 @@
 <!DOCTYPE html>
 
-<html lang="en" ng-app="crudApp">
+<html lang="en" ng-app="crudApp" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <title>Game panel</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+          integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 </head>
 <style>
     body {
-        background-image: url("background.jpg");
+        /*background-image: url("background.jpg");*/
+        background-color: #3c763d;
+    }
+
+    .center {
+        display: inline-block;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 200px;
+        height: 100px;
+        margin: auto;
+    }
+
+    .button {
+        border: none;
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+        display: inline;
+        margin: 13px 12px 12px 10px;
+    }
+
+    .centeredTop {
+        position: fixed;
+        left: 43%;
+        top: 30%;
+    }
+    .centeredBottom {
+        position: fixed;
+        top: 75%;
+        left: 43%;
     }
 
 </style>
+<script src="https://unpkg.com/vue"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <body>
+<div id="btn-panel" class="center" v-for="post in posts">
+    <a href="#" v-on:click="createGame()" class="button">DEAL</a>
+    <a href="#" v-on:click="initGame()" class="button">HIT</a>
+    <a href="#" v-on:click="initGame()" class="button">BUST</a>
+   <!-- <a href="#" v-on:click="initGame()" class="button">Start another game</a>-->
+</div>
+<div id="dealer-panel" class="centeredBottom" v-for="card in dealerCards">
+   <h1>Cards dealer</h1>
+</div>
 
-<h1>hello</h1>
+<div id="player-panel" class="centeredTop" v-for="card in playerCards">
+    <h1>Cards player</h1>
+</div>
+
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            dealerCards: [],
+            playerCards: []
+        },
+        created: function () {
+            var vm = this;
+            console.log('game is about to start new game');
+        },
+        methods: {
+            createGame: function () {
+                axious.post('/game/create/', {})
+                    .then(function (response) {
+                        console.log(response)
+                    })
+                    .catch(function (error) {
+                        console.log(error)
+                    })
+
+            }
+        }
+    })
+</script>
 
 </body>
 </html>
