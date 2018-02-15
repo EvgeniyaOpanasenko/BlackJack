@@ -4,12 +4,14 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.io.Serializable;
+
 /**
- * Represents a playing card*/
+ * Represents a playing card
+ */
 @Component
 @Entity
 @Table(name = "cards")
-public class Card implements Serializable{
+public class Card implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -28,6 +30,9 @@ public class Card implements Serializable{
     public Card() {
     }
 
+    /**
+     * Creates a {@code Card} with the given rank and suit.
+     */
     public Card(CardSuit suit, CardRank value) {
         this.suit = suit;
         this.value = value;

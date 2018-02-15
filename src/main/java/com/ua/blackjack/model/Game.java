@@ -5,10 +5,16 @@ import org.springframework.stereotype.Component;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * Represents game which contains
+ *
+ * @see BasicPlayer
+ * need to refactor and change the fileds whisch are needed to be stored
+ */
 @Entity
 @Table(name = "games")
 @Component
-public class Game implements Serializable{
+public class Game implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -20,8 +26,6 @@ public class Game implements Serializable{
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "dealer_id", referencedColumnName = "id")
     private BasicPlayer dealer;
-
-    //private Deck deck;
 
     private GameStatus gameStatus;
 
@@ -52,11 +56,6 @@ public class Game implements Serializable{
     public void setDealer(BasicPlayer dealer) {
         this.dealer = dealer;
     }
-
-    public void setDealer(Dealer dealer) {
-        this.dealer = dealer;
-    }
-
 
     public GameStatus getGameStatus() {
         return gameStatus;

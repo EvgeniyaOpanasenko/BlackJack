@@ -10,11 +10,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.jws.Oneway;
 import java.util.List;
 
 import static java.util.Objects.requireNonNull;
 
+/**
+ * Class contains realization of interface GameService
+ */
 @Service
 public class GameServiceImpl implements GameService {
 

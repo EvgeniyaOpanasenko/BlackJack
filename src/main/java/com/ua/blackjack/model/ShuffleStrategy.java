@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Contains logic for randomly shuffling element of a list
+ */
 @Component
 public class ShuffleStrategy<T> {
     List<T> shuffle(List<T> input) {

@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-/**The {@code RestController} provides the API to create and play the blackJack game**/
+/**
+ * The {@code RestController} provides the API to create and play the blackJack game
+ **/
 @RestController
 @RequestMapping("/game")
 public class GameController {
@@ -31,7 +33,6 @@ public class GameController {
         headers.setLocation(ucBuilder.path("/game/game/{id}").buildAndExpand(newGame.getId()).toUri());
         return new ResponseEntity<Void>(headers, HttpStatus.OK);
     }
-
 
 
 }
