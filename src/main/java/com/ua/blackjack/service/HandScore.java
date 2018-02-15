@@ -84,6 +84,9 @@ public class HandScore {
         return value > 21;
     }
 
+    /**
+     * If dealer's car value is less than 17. Thank dealer bust.
+     */
     public static boolean isBeforeDealerMinimum(List<Card> dealer) {
         return value(dealer) < DEALER_MINIMUM;
     }

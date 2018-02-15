@@ -15,7 +15,9 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Class contains realization of interface GameService
+ * Class contains implementation of interface
+ *
+ * @see GameService
  */
 @Service
 public class GameServiceImpl implements GameService {
@@ -37,6 +39,10 @@ public class GameServiceImpl implements GameService {
     private List<Card> dealer;
 
     //TODO add exception
+
+    /**
+     * make game started. Deal cards to dealer and player
+     */
     public void initGame(Game newGame) {
         gameRepository.save(newGame);
         deal(player);
@@ -45,8 +51,12 @@ public class GameServiceImpl implements GameService {
         deal(dealer);
     }
 
+    /**
+     * Counts the value of cards of a player
+     */
     private void countResult() {
         if (HandScore.isBlackJack(player)) {
+            //TODO create winHandle() => ends game ang change status of the game.
             game.setGameStatus(GameStatus.PLAYER_WON);
         } else if (HandScore.isBust(HandScore.value(player))) {
             game.setGameStatus(GameStatus.DEALER_WON);
@@ -56,10 +66,17 @@ public class GameServiceImpl implements GameService {
         }
     }
 
+    /**
+     * compares the card's value of two players
+     */
     private void setGameOutcome() {
         countWinner(dealer, player);
     }
 
+    /**
+     * Counts the value of player's card
+     */
+    //TODO countResult vs countWinner
     private void countWinner(List<Card> dealer, List<Card> player) {
         int playerCount = HandScore.value(player);
         int dealerCount = HandScore.value(dealer);
@@ -76,6 +93,9 @@ public class GameServiceImpl implements GameService {
         }
     }
 
+    /**
+     * before dealer start to play need to check if dealers score is more than 17
+     */
     private void dealerPlay() {
         while (HandScore.isBeforeDealerMinimum(dealer)) {
             deal(dealer);
@@ -83,17 +103,24 @@ public class GameServiceImpl implements GameService {
     }
 
     private boolean isDealerTurn() {
-
         return game.getGameStatus() == GameStatus.DEALER_TURN || HandScore.isTarget(player);
     }
 
+    /**
+     * Hit card
+     */
     private void deal(List<Card> hand) {
         Card next = requireNonNull(deck.deal());
-        //game.getDealer().getCards().add(next);
+        hand.add(next);
         LOG.info(game.getId() + " dealt " + next);
         hand.add(next);
     }
 
+    /**
+     * is implemented methods listed in
+     *
+     * @see GameService
+     */
     @Override
     public Game createGame(Game newGame) {
         return gameRepository.save(newGame);
