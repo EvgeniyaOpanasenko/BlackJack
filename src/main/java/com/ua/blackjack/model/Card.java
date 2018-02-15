@@ -4,7 +4,8 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.io.Serializable;
-
+/**
+ * Represents a playing card*/
 @Component
 @Entity
 @Table(name = "cards")
@@ -63,4 +64,5 @@ public class Card implements Serializable{
     public void setPlayer(BasicPlayer player) {
         this.player = player;
     }
+
 }

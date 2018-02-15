@@ -8,6 +8,9 @@ import java.util.Queue;
 
 import static java.util.Objects.nonNull;
 
+/**Represents a deck of cards which are going to be used in a new game
+ * @see DeckFactory#createDeck()
+ * */
 @Component
 public class Deck {
     private Queue<Card> cards;

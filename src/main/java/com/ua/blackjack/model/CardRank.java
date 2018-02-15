@@ -1,5 +1,6 @@
 package com.ua.blackjack.model;
 
+/**Represents a rank of playing card*/
 public enum CardRank {
     TWO(2), THREE(3), FOUR(4),
     FIVE(5), SIX(6), SEVEN(7),

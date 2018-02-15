@@ -1,5 +1,6 @@
 package com.ua.blackjack.model;
 
+/** Represents dealer of the game*/
 public class Dealer extends BasicPlayer {
     private Deck deck;
 

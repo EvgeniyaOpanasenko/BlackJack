@@ -3,7 +3,8 @@ package com.ua.blackjack.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
-
+/**
+ * Represents basic player which contains id and set of card for particular game*/
 @Entity
 @Table(name = "users")
 public class BasicPlayer implements Serializable {
