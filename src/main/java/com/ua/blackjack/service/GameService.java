@@ -4,5 +4,5 @@ import com.ua.blackjack.model.Game;
 
 public interface GameService {
 
-    void createGame(Game newGame);
+    Game createGame(Game newGame);
 }

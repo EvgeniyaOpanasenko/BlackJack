@@ -93,8 +93,7 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public void createGame(Game newGame) {
-         initGame(newGame);
-        //return gameRepository.save(newGame);
+    public Game createGame(Game newGame) {
+        return gameRepository.save(newGame);
     }
 }

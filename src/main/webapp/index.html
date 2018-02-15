@@ -5,80 +5,67 @@
     <title>Game panel</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
           integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link href="css/app.css" rel="stylesheet"/>
 </head>
-<style>
-    body {
-        /*background-image: url("background.jpg");*/
-        background-color: #3c763d;
-    }
-
-    .center {
-        display: inline-block;
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        width: 200px;
-        height: 100px;
-        margin: auto;
-    }
-
-    .button {
-        border: none;
-        color: white;
-        text-decoration: none;
-        font-size: 16px;
-        display: inline;
-        margin: 13px 12px 12px 10px;
-    }
-
-    .centeredTop {
-        position: fixed;
-        left: 43%;
-        top: 30%;
-    }
-    .centeredBottom {
-        position: fixed;
-        top: 75%;
-        left: 43%;
-    }
-
-</style>
 <script src="https://unpkg.com/vue"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <body>
-<div id="btn-panel" class="center" v-for="post in posts">
-    <a href="#" v-on:click="createGame()" class="button">DEAL</a>
-    <a href="#" v-on:click="initGame()" class="button">HIT</a>
-    <a href="#" v-on:click="initGame()" class="button">BUST</a>
-   <!-- <a href="#" v-on:click="initGame()" class="button">Start another game</a>-->
+<div class="generic-container">
+    <div class="panel panel-default">
+        <div class="panel-heading"><span class="lead">BlackJack</span></div>
+        <div class="panel-body">
+            <!--<div>
+                <div class="alert alert-success" role="alert" v-if="successMessage">{{successMessage}}</div>
+                <div class="alert alert-danger" role="alert" v-if="errorMessage">{{errorMessage}}</div>
+                <div class="alert alert-info-" role="alert" v-if="infoMessage">{{outcomeOfTheGameMessage}}</div>
+            </div>-->
+            <div>
+                <h1>Simple BlackJack game</h1>
+                <h1>Press start to try it</h1>
+                <button type="submit" name="myGame" v-click="createGame()" class="bg-success" >Deal</button>
+            </div>
+            <div>
+                <div class="tableContainer">
+                    <h1>Cards</h1>
+                </div>
+                <div class="row" ng-model="btnContainer" v-if="dealBtn">
+                    <div class="form-actions floatRight">
+                        <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" v-if="">Hit</button>
+                        <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" >Stand</button>
+                        <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" >Start new game</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<div id="dealer-panel" class="centeredBottom" v-for="card in dealerCards">
-   <h1>Cards dealer</h1>
-</div>
-
-<div id="player-panel" class="centeredTop" v-for="card in playerCards">
-    <h1>Cards player</h1>
-</div>
-
-
 <script>
     var app = new Vue({
         el: '#app',
         data: {
             dealerCards: [],
-            playerCards: []
+            playerCards: [],
+            successMessage: '',
+            errorMessage: '',
+            outcomeOfTheGameMessage: ''
+
         },
         created: function () {
             var vm = this;
-            console.log('game is about to start new game');
+            console.log('is about to start new game');
         },
         methods: {
             createGame: function () {
-                axious.post('/game/create/', {})
+                var vm = this;
+                axious.post('/game/create', {})
                     .then(function (response) {
-                        console.log(response)
+                        if (response.status = 200){
+                            vm.successMessage = response;
+                        }else {
+                            vm.errorMessage = response;
+                        }
+
+                        console.log(response);
                     })
                     .catch(function (error) {
                         console.log(error)
